@@ -1,8 +1,9 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyListMonoidAssocScript (listMonoidAssoc) where
 
 import VerifyAppendAssocScript
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 assocLeft :: Rewrite LCore
 assocLeft
@@ -26,8 +27,8 @@ listMonoidAssoc = do
   appendAssoc
 
   proof "monoid-assoc" $ do
-    apply . lhsR $ assocLeft
-    apply . rhsR $ assocRight
+    apply . lhs $ assocLeft
+    apply . rhs $ assocRight
 
 script :: Shell ()
 script = listMonoidAssoc

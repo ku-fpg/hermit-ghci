@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyListMonadAssocScript (listMonadAssoc) where
 --------------------------------------------
 -- Verify monad-assoc (for List)
@@ -34,7 +35,7 @@ module VerifyListMonadAssocScript (listMonadAssoc) where
 -- \x -> concat (concat x) == \x -> concat (map concat x)
 
 --------------------------------------------
-import HERMIT.API
+import HERMIT.API.Prelude
 
 import VerifyMapComposeScript
 import VerifyConcatNonemptyScript
@@ -64,7 +65,7 @@ listMonadAssoc = do
 
   proof "monad-assoc" $ do
     pathS [forallBody] $ do
-      apply . lhsR $ assocLhs
+      apply . lhs $ assocLhs
 
       pathS [eqRhs] $ do
         apply . anyCall $ unfoldWith "bind"

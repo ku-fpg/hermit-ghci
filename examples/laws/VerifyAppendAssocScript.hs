@@ -1,8 +1,9 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyAppendAssocScript
   (appendAssoc)
   where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 import VerifyNilAppendScript
 
@@ -19,7 +20,7 @@ appendAssoc = do
       -- undefined case
       pathS [conjLhs] $ do
         pathS [forallBody] $ do
-          apply . bothR . oneBU $ inlineWith "++"
+          apply . both . oneBU $ inlineWith "++"
           apply smash
           apply . pathR [eqRhs] . oneTD $ inlineWith "++"
           apply smash

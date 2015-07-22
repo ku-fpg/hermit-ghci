@@ -217,10 +217,10 @@ instance External (RewriteH LCore) where
         (promoteExprR inlineCaseAlternativeR :: RewriteH LCore)
 
 -- HERMIT.API.Dictionary.KURE
-    , external "idCore"
+    , external "id"
         (idR :: RewriteH LCore)
 
-    , external "fail_"
+    , external "fail"
         (fail :: String -> RewriteH LCore)
 
     , external "<+"
@@ -588,7 +588,7 @@ instance External (RewriteH LCore) where
     , external "foldRight" (\n1 -> promoteR (mergeQuantifiersR (const False) (cmpHN2Var n1)) :: RewriteH LCore)
     , external "lemmaForward" (forwardT . promoteExprBiR . lemmaBiR Obligation :: LemmaName -> RewriteH LCore)
     , external "lemmaBackward" (backwardT . promoteExprBiR . lemmaBiR Obligation :: LemmaName -> RewriteH LCore)
-    , external "lemma-consequent" (promoteClauseR . lemmaConsequentR Obligation :: LemmaName -> RewriteH LCore)
+    , external "lemmaConsequent" (promoteClauseR . lemmaConsequentR Obligation :: LemmaName -> RewriteH LCore)
     , external "lemmaLhsIntro" (promoteCoreR . lemmaLhsIntroR :: LemmaName -> RewriteH LCore)
     , external "lemmaRhsIntro" (promoteCoreR . lemmaRhsIntroR :: LemmaName -> RewriteH LCore)
     , external "instDictionaries" (promoteClauseR instantiateDictsR :: RewriteH LCore)
@@ -640,7 +640,7 @@ instance External (RewriteH LCoreTC) where
         (bracketR :: String -> RewriteH LCoreTC -> RewriteH LCoreTC)
 
 -- HERMIT.API.Dictionary.KURE
-    , external "idCoreTC"
+    , external "id"
         (idR :: RewriteH LCoreTC)
 
     , external ">>>"
@@ -688,7 +688,7 @@ instance External (TransformH LCore LocalPathH) where
         (promoteModGutsT gutsProgEndT <+
          promoteProgT progEndT :: TransformH LCore LocalPathH)
 
-    , external "parentOfCore"
+    , external "parentOf"
         (parentOfT :: TransformH LCore LocalPathH
                    -> TransformH LCore LocalPathH)
     ]
@@ -716,7 +716,7 @@ instance External (TransformH LCoreTC LocalPathH) where
         (applicationOfT .
          mkOccPred :: OccurrenceName -> TransformH LCoreTC LocalPathH)
 
-    , external "parentOfCoreTC"
+    , external "parentOf"
         (parentOfT :: TransformH LCoreTC LocalPathH
                    -> TransformH LCoreTC LocalPathH)
     ]
@@ -762,7 +762,7 @@ instance External (TransformH LCore ()) where
         ((<+) :: TransformH LCore () -> TransformH LCore ()
               -> TransformH LCore ())
 
-    , external "not_"
+    , external "not"
        (notM :: TransformH LCore () -> TransformH LCore ())
 
 -- HERMIT.API.Dictionary.New

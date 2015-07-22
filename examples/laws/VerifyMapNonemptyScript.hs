@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyMapNonemptyScript (mapNonempty) where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 mapNonempty :: Shell ()
 mapNonempty = do
@@ -8,7 +9,7 @@ mapNonempty = do
 
   proof "map-nonempty" $ do
     pathS [forallBody] $ do
-      apply . lhsR $ unfoldWith "map"
+      apply . lhs $ unfoldWith "map"
       apply smash
 
 script :: Shell ()

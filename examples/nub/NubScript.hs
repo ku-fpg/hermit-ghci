@@ -1,5 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module NubScript where
-import HERMIT.API
+
+import HERMIT.API.Prelude
 
 script :: Shell ()
 script = do
@@ -24,7 +26,7 @@ script = do
   apply $ oneTD (caseFloatArgLemma "nubStrict")
 
   -- prove strictness condition
-  apply $ lhsR unfold ; apply smash ; proofCmd endProof
+  apply $ lhs unfold ; apply smash ; proofCmd endProof
 
   apply $ oneTD (unfoldWith "nub'")
   apply simplify
@@ -32,7 +34,7 @@ script = do
   apply $ oneTD (caseFloatArgLemma "nubStrict")
 
   -- prove strictness condition
-  apply $ lhsR unfold ; apply smash ; proofCmd endProof
+  apply $ lhs unfold ; apply smash ; proofCmd endProof
 
   scope $ do setPath (consider CaseOf) ; setPath (consider CaseOf) ; sendCrumb (caseAlt 1) ; sendCrumb altRhs
              apply unfold ; apply simplify

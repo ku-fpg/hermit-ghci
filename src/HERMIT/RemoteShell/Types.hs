@@ -1,35 +1,25 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 
 -- This types that are common to both the Server and GHCI.
 -- AJG: I think this should move to HERMIT.API.Types
 module HERMIT.RemoteShell.Types where
 
-import Control.Applicative
+import           Data.Aeson
+import           Data.Default.Class
 
-import HERMIT.PrettyPrinter.Common
+import           HERMIT.API.Types
+import           HERMIT.Plugin.Renderer
+import           HERMIT.PrettyPrinter.Common
+import           HERMIT.RemoteShell.Orphanage ()
 
-import HERMIT.GHCI.JSON
-import           HERMIT.GHCI.Glyph
+import           GHC.Generics
 
-import Data.Aeson
-import Data.Aeson.Types
-import Data.Coerce
+import           Prelude.Compat
 
-import GHC.Generics
+import           System.IO (stdout)
 
-import Text.PrettyPrint.MarkedHughesPJ as PP
-import qualified Language.KURE.Path as KURE
-import HERMIT.RemoteShell.Orphanage
-import HERMIT.GHCI.Glyph
-import HERMIT.API.Types
-
-import HERMIT.Plugin.Renderer
-
-import Data.Default.Class
-
-import System.IO (stdout)
-        
 -- 'Document' is the client facing, pre-rendered, pretty output.
 newtype Document = Document DocH
   deriving (Generic)
@@ -49,7 +39,7 @@ instance Response Document where
           print "<<DOCUMENT>>"
           print "End Document"
 
--- Extract the underlying DocH.        
+-- Extract the underlying DocH.
 toDocH :: Document -> DocH
 toDocH (Document d) = d
 

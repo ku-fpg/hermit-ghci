@@ -1,5 +1,6 @@
-{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 -- This is where *all* the orphan instances live.
@@ -11,18 +12,15 @@ module HERMIT.RemoteShell.Orphanage where
 
 import HERMIT.PrettyPrinter.Common
 
-import           Control.Applicative
 import           Control.Monad
 
 import           Data.Aeson
-import           Data.Aeson.Types
-import           Data.Coerce
-
-import           GHC.Generics
 
 import           HERMIT.Core (Crumb(..))
 
 import qualified Language.KURE.Path as KURE
+
+import           Prelude.Compat
 
 import           Text.PrettyPrint.MarkedHughesPJ as PP
 

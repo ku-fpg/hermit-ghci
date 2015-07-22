@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyMapComposeScript (mapCompose) where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 composeLeft :: Rewrite LCore
 composeLeft
@@ -51,13 +52,13 @@ mapCompose = do
 
         -- nil case
       pathS [conjRhs, conjLhs] $ do
-        apply . rhsR $ nilRight
-        apply . lhsR $ unfoldWith "map"
+        apply . rhs $ nilRight
+        apply . lhs $ unfoldWith "map"
         apply smash
 
         -- cons case
       pathS [conjRhs, conjRhs, forallBody, consequent] $ do
-        apply . rhsR $ consRight
+        apply . rhs $ consRight
         apply . oneBU $ inlineWith "map"
         apply smash
         pathS [eqLhs] $ do

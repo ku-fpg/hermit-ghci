@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyConcatNonemptyScript (concatNonempty) where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 oneSide :: Rewrite LCore
 oneSide
@@ -15,7 +16,7 @@ concatNonempty = do
 
   proof "concat-nonempty" $ do
     pathS [forallBody] $ do
-      apply . bothR $ oneSide
+      apply . both $ oneSide
 
 script :: Shell ()
 script = concatNonempty
